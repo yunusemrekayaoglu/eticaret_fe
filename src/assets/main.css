@@ -1,0 +1,38 @@
+@import "yazitipi.css";
+
+@import "./temalar/acik_renk_temasi.css";
+@import "./temalar/koyu_renk_temasi.css";
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  box-sizing: border-box;
+  font-weight: normal;
+}
+
+body {
+  min-height: 100vh;
+}
+
+#app {
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--arkaplan);
+  color: var(--yazirengi);
+}
+
+
+
+#app .kapsayici{
+  min-height: 100vh;
+  background-color: var(--arkaplan);
+  color: var(--yazirengi);
+  transition: color 1s, background-color 1s;
+}
+
+
+#app .kapsayici * {
+  transition: color 1s, background-color 1s;
+
+}

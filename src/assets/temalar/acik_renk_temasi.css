@@ -1,0 +1,22 @@
+.acik {
+    --arkaplan: #82E0AA;
+    --yazirengi: #212F3C;
+
+    --baslik-arkaplan: #58D68D;
+    --baslik-yazirengi: #212F3D;
+
+    --menu-arkaplan: #A9DFBF;
+    --menu-yazirengi: #1C2833;
+
+    --menu-arkaplan-uzerinde: #32654b;
+    --menu-yazirengi-uzerinde: #212F3D;
+
+    --sol_icerik-arkaplan: #82E0AA;
+    --sol_icerik-yazirengi: #2A3B4D;
+
+    --sag_icerik-arkaplan: #ABEBC6;
+    --sag_icerik-yazirengi: #315275;
+
+    --alt-bilgi-arkaplan: #58D68D;
+    --alt-bilgi-yazirengi: #212F3D;
+}

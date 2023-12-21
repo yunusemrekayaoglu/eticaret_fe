@@ -1,0 +1,23 @@
+.koyu {
+    --arkaplan: #34495E;
+    --yazirengi: #ECF0F1;
+
+    --baslik-arkaplan: #212F3D;
+    --baslik-yazirengi: #58D68D;
+
+    --menu-arkaplan: #1C2833;
+    --menu-yazirengi: #A9DFBF;
+
+    --menu-arkaplan-uzerinde: #212F3D;
+    --menu-yazirengi-uzerinde: #A9DFBF;
+
+    --sol_icerik-arkaplan: #2A3B4D;
+    --sol_icerik-yazirengi: #82E0AA;
+
+    --sag_icerik-arkaplan: #315275;
+    --sag_icerik-yazirengi: #ABEBC6;
+
+    --alt-bilgi-arkaplan: #212F3D;
+    --alt-bilgi-yazirengi: #58D68D;
+
+}
