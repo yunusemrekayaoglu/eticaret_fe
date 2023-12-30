@@ -4,67 +4,67 @@ import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {ref} from "vue";
 import ModalComponent from "@/bilesenler/ortak/ModalComponent.vue";
 
-const magaza = ref({
-  magaza_id: -1,
-  adi: '',
-  adres: '',
+const musteri = ref({
+  musteri_id: -1,
+  ad:'',
+  soyad: '',
   telefon: '',
-  yetkili: '',
+  adres: '',
+
 
 });
 
 const dialog_acik = ref(false)
 
 
-function magaza_bilgilerini_yazdir()
+function musteri_bilgilerini_yazdir()
 {
   dialog_acik.value = true;
+  console.log(musteri.value)
 }
 
 </script>
 
 <template>
-<div class="data_form">
-  <div class="satir">
-    <div class="etiket">Mağaza Adı</div>
-    <div class="bilesen">
-      <font-awesome-icon icon="basket-shopping"></font-awesome-icon>
-      <input class="girdi" type="text" name="adi" v-model="magaza.adi"/>
+  <div class="data_form">
+    <div class="satir">
+      <div class="etiket">Müşteri Adı</div>
+      <div class="bilesen">
+        <font-awesome-icon icon="circle-user" />
+        <input class="girdi" type="text" name="ad" v-model="musteri.ad"/>
+      </div>
     </div>
-  </div>
 
-  <div class="satir">
-    <div class="etiket">Mağaza Adresi</div>
-    <div class="bilesen">
-      <font-awesome-icon icon="fa-solid fa-location-pin"></font-awesome-icon>
-      <textarea class="girdi" name="adres" v-model="magaza.adres">
+    <div class="satir">
+      <div class="etiket">Müşteri Soyadı</div>
+      <div class="bilesen">
+        <font-awesome-icon icon="circle-user" />
+        <input class="girdi" name="soyad" v-model="musteri.soyad"/>
+      </div>
+    </div>
 
-      </textarea>
+    <div class="satir">
+      <div class="etiket">Telefon Numarası</div>
+      <div class="bilesen">
+        <font-awesome-icon icon="fa-phone" />
+        <input class="girdi" type="text" name="telefon" v-model="musteri.telefon"/>
+      </div>
     </div>
-  </div>
 
-  <div class="satir">
-    <div class="etiket">Mağaza Telefonu</div>
-    <div class="bilesen">
-      <font-awesome-icon icon="fa-solid fa-phone"></font-awesome-icon>
-      <input class="girdi" type="text" name="telefon"  placeholder="0 (5XX) XXX XX XX" v-model="magaza.telefon"/>
+    <div class="satir">
+      <div class="etiket">Müşteri Adresi</div>
+      <div class="bilesen">
+        <font-awesome-icon icon="fa-location-pin" />
+        <textarea class="girdi" name="adres" v-model="musteri.adres"></textarea>
+      </div>
+    </div>
+    <div class="satir">
+      <div class="buttoncubugu">
+        <div class="button olumlu" @click="musteri_bilgilerini_yazdir">Ekle</div>
+        <div class="button olumsuz" >İptal</div>
+      </div>
     </div>
   </div>
-
-  <div class="satir">
-    <div class="etiket">Mağaza Yetkili Kişi Adı</div>
-    <div class="bilesen">
-      <font-awesome-icon icon="fa-solid fa-person"></font-awesome-icon>
-      <input class="girdi" type="text" name="yetkili" v-model="magaza.yetkili" />
-    </div>
-  </div>
-  <div class="satir">
-    <div class="buttoncubugu">
-      <div class="button olumlu" @click="magaza_bilgilerini_yazdir">Ekle</div>
-      <div class="button olumsuz" >İptal</div>
-    </div>
-  </div>
-</div>
   <ModalComponent v-model:acik="dialog_acik" @update:kapanma-sebebi="sebep => {
     if(sebep==='buton')
       {
@@ -85,7 +85,7 @@ function magaza_bilgilerini_yazdir()
 
 
 
-span.uyari{
+span.uyari {
   font-size: 9pt;
   color: orangered;
 }

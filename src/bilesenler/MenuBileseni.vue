@@ -5,11 +5,11 @@
 <template>
 <div class="menu">
   <router-link to="/magaza">Mağaza Bilgileri</router-link>
-  <a href="#">Ürün Bilgileri</a>
-  <a href="#">Tedarikçiler</a>
-  <a href="#">Müşteriler</a>
-  <a href="#">Alış İşlemleri</a>
-  <a href="#">Satış İşlemleri</a>
+  <router-link to="/urun">Ürün Bilgileri</router-link>
+  <router-link to="/musteri">Müşteriler</router-link>
+  <router-link to="/siparis">Siparişler</router-link>
+  <router-link to="/alis_hareketleri">Alış İşlemleri</router-link>
+  <router-link to="satis_modeli">Satış İşlemleri</router-link>
 </div>
 </template>
 

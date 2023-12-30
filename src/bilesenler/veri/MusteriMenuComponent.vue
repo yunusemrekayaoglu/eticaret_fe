@@ -3,10 +3,10 @@
 </script>
 
 <template>
-  <div class="magaza_menu">
+  <div class="musteri_menu">
     <div class="alt_menu">
-      <router-link to="magaza/ekle">Mağaza Ekle</router-link>
-      <a href="#">Mağaza Liste</a>
+      <router-link to="musteri/ekle">Müşteri Ekle</router-link>
+      <a href="#">Müşterileri Listele</a>
     </div>
     <div class="icerik">
       <router-view> </router-view>
@@ -17,7 +17,7 @@
 
 <style scoped>
 
-.magaza_menu {
+.musteri_menu {
   display: flex;
 }
 

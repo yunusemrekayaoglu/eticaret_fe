@@ -19,4 +19,10 @@
 
     --alt-bilgi-arkaplan: #58D68D;
     --alt-bilgi-yazirengi: #212F3D;
+
+    --button-olumlu-arkaplan: #52BE80;
+    --button-olumlu-arkaplan-uzerinde: #27AE60;
+    --button-olumsuz-arkaplan: #D98880;
+    --button-olumsuz-arkaplan-uzerinde: #C0392B;
+
 }
