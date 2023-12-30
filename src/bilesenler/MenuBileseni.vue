@@ -4,6 +4,7 @@
 
 <template>
 <div class="menu">
+  <a href="#">Anasayfa</a>
   <router-link to="/magaza">Mağaza Bilgileri</router-link>
   <router-link to="/urun">Ürün Bilgileri</router-link>
   <router-link to="/musteri">Müşteriler</router-link>

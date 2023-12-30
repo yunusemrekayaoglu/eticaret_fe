@@ -6,6 +6,10 @@ import UrunMenuComponent from "@/bilesenler/veri/UrunMenuComponent.vue";
 import UrunEklemeComponent from "@/bilesenler/veri/UrunEklemeComponent.vue";
 import MusteriMenuComponent from "@/bilesenler/veri/MusteriMenuComponent.vue";
 import MusteriEklemeComponent from "@/bilesenler/veri/MusteriEklemeComponent.vue";
+import AlisHareketleriMenuComponent from "@/bilesenler/veri/AlisHareketleriMenuComponent.vue";
+import AlisHareketleriEklemeComponent from "@/bilesenler/veri/AlisHareketleriEklemeComponent.vue";
+import SatisModeliEklemeComponent from "@/bilesenler/veri/SatisModeliEklemeComponent.vue";
+import SatisModeliMenuComponent from "@/bilesenler/veri/SatisModeliMenuComponent.vue";
 
 
 export const router = createRouter({
@@ -55,6 +59,18 @@ export const router = createRouter({
                     {
                         path: 'ekle',
                         component: AlisHareketleriEklemeComponent
+                    }
+                ]
+        },
+
+        {
+            path: '/satis_modeli',
+            component: SatisModeliMenuComponent,
+            children:
+                [
+                    {
+                        path: 'ekle',
+                        component: SatisModeliEklemeComponent
                     }
                 ]
         },

@@ -13,13 +13,14 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
 import {
-    faBasketShopping, faCircleUser,
+    faBasketShopping, faCalendar, faCircleUser,
     faHeading,
     faLocationPin,
     faNoteSticky,
     faPerson,
     faPhone,
-    faQuestion, faTag,
+    faQuestion,
+    faTag,
     faTurkishLiraSign
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -33,7 +34,8 @@ library.add([faBasketShopping,
              faTurkishLiraSign,
              faHeading,
              faTag,
-             faCircleUser])
+             faCircleUser,
+             faCalendar])
 
 
 const pinia = createPinia();
