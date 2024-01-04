@@ -3,15 +3,16 @@
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {ref} from "vue";
 import ModalComponent from "@/bilesenler/ortak/ModalComponent.vue";
+import {alisHareketiDukkaniKullan} from "@/dukkanlar/alisHareketleriDukkani";
+import {storeToRefs} from "pinia";
 
-const alis_hareketleri = ref({
-  alis_hareketi_id: -1,
-  urun_id: '',
-  miktar:'',
-  birim_fiyat: '',
-  tarih: '',
 
-});
+const alisHareketiKullan = alisHareketiDukkaniKullan();
+
+const {yeniAlisHareketi} = storeToRefs(alisHareketiKullan);
+
+const {ekle} = alisHareketiKullan;
+
 
 const dialog_acik = ref(false)
 
@@ -19,7 +20,6 @@ const dialog_acik = ref(false)
 function alis_hareketleri_bilgilerini_yazdir()
 {
   dialog_acik.value = true;
-  console.log(alis_hareketleri.value)
 }
 
 </script>
@@ -30,7 +30,7 @@ function alis_hareketleri_bilgilerini_yazdir()
       <div class="etiket">Alış Miktarı</div>
       <div class="bilesen">
         <font-awesome-icon icon="circle-user" />
-        <input class="girdi" type="text" name="miktar" v-model="alis_hareketleri.miktar"/>
+        <input class="girdi" type="text" name="miktar" v-model="yeniAlisHareketi.miktar"/>
       </div>
     </div>
 
@@ -38,7 +38,7 @@ function alis_hareketleri_bilgilerini_yazdir()
       <div class="etiket">Birim Fiyatı</div>
       <div class="bilesen">
         <font-awesome-icon icon="turkish-lira-sign" />
-        <input class="girdi" name="birim_fiyat" v-model="alis_hareketleri.birim_fiyat"/>
+        <input class="girdi" name="birim_fiyat" v-model="yeniAlisHareketi.birim_fiyat"/>
       </div>
     </div>
 
@@ -46,7 +46,7 @@ function alis_hareketleri_bilgilerini_yazdir()
       <div class="etiket">Tarih</div>
       <div class="bilesen">
         <font-awesome-icon icon="calendar" />
-        <input type="date" id="tarih" name="tarih" v-model="alis_hareketleri.tarih">
+        <input type="date" id="tarih" name="tarih" v-model="yeniAlisHareketi.tarih">
       </div>
     </div>
 
@@ -69,6 +69,10 @@ function alis_hareketleri_bilgilerini_yazdir()
     <template #sorumetni>
       Değişiklikleri kaydetmek istediğinize emin misiniz? <br/>
       <span class="uyari"> işlem geri alınamaz.</span>
+    </template>
+    <template #butonlar>
+      <div class="soru button olumlu" @click="ekle( () => { dialog_acik=false; })">Evet</div>
+      <div class="soru button olumsuz">Hayır</div>
     </template>
   </ModalComponent>
 </template>
@@ -97,23 +101,25 @@ div.button {
   cursor: pointer;
 }
 div.button.olumlu {
-  background-color: var(--button-olumlu-arkaplan);
+  background-color: #52BE80;
   color: white;
 }
 
 div.button.olumlu:hover {
-  background-color: var(--button-olumlu-arkaplan-uzerinde);
+  background-color: #27AE60;
   color: white;
 }
 
 div.button.olumsuz {
-  background-color: var(--button-olumsuz-arkaplan);
+  background-color: #D98880;
   color: white;
 }
+
 div.button.olumsuz:hover {
-  background-color: var(--button-olumsuz-arkaplan-uzerinde);
+  background-color: #C0392B;
   color: white;
 }
+
 
 
 

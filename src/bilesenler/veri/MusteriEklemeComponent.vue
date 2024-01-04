@@ -3,16 +3,14 @@
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {ref} from "vue";
 import ModalComponent from "@/bilesenler/ortak/ModalComponent.vue";
+import {musteriDukkaniKullan} from "@/dukkanlar/musteriDukkani";
+import {storeToRefs} from "pinia";
 
-const musteri = ref({
-  musteri_id: -1,
-  ad:'',
-  soyad: '',
-  telefon: '',
-  adres: '',
+const musteriDukkan = musteriDukkaniKullan();
 
+const {yeniMusteri} = storeToRefs(musteriDukkan);
 
-});
+const { ekle } = musteriDukkan;
 
 const dialog_acik = ref(false)
 
@@ -31,7 +29,7 @@ function musteri_bilgilerini_yazdir()
       <div class="etiket">Müşteri Adı</div>
       <div class="bilesen">
         <font-awesome-icon icon="circle-user" />
-        <input class="girdi" type="text" name="ad" v-model="musteri.ad"/>
+        <input class="girdi" type="text" name="ad" v-model="yeniMusteri.ad"/>
       </div>
     </div>
 
@@ -39,7 +37,7 @@ function musteri_bilgilerini_yazdir()
       <div class="etiket">Müşteri Soyadı</div>
       <div class="bilesen">
         <font-awesome-icon icon="circle-user" />
-        <input class="girdi" name="soyad" v-model="musteri.soyad"/>
+        <input class="girdi" name="soyad" v-model="yeniMusteri.soyad"/>
       </div>
     </div>
 
@@ -47,7 +45,7 @@ function musteri_bilgilerini_yazdir()
       <div class="etiket">Telefon Numarası</div>
       <div class="bilesen">
         <font-awesome-icon icon="fa-phone" />
-        <input class="girdi" type="text" name="telefon" v-model="musteri.telefon"/>
+        <input class="girdi" type="text" name="telefon" v-model="yeniMusteri.telefon"/>
       </div>
     </div>
 
@@ -55,7 +53,7 @@ function musteri_bilgilerini_yazdir()
       <div class="etiket">Müşteri Adresi</div>
       <div class="bilesen">
         <font-awesome-icon icon="fa-location-pin" />
-        <textarea class="girdi" name="adres" v-model="musteri.adres"></textarea>
+        <textarea class="girdi" name="adres" v-model="yeniMusteri.adres"></textarea>
       </div>
     </div>
     <div class="satir">
@@ -77,6 +75,10 @@ function musteri_bilgilerini_yazdir()
     <template #sorumetni>
       Değişiklikleri kaydetmek istediğinize emin misiniz? <br/>
       <span class="uyari"> işlem geri alınamaz.</span>
+    </template>
+    <template #butonlar>
+      <div class="soru button olumlu" @click="ekle( () => { dialog_acik=false; })">Evet</div>
+      <div class="soru button olumsuz">Hayır</div>
     </template>
   </ModalComponent>
 </template>
@@ -105,21 +107,22 @@ div.button {
   cursor: pointer;
 }
 div.button.olumlu {
-  background-color: var(--button-olumlu-arkaplan);
+  background-color: #52BE80;
   color: white;
 }
 
 div.button.olumlu:hover {
-  background-color: var(--button-olumlu-arkaplan-uzerinde);
+  background-color: #27AE60;
   color: white;
 }
 
 div.button.olumsuz {
-  background-color: var(--button-olumsuz-arkaplan);
+  background-color: #D98880;
   color: white;
 }
+
 div.button.olumsuz:hover {
-  background-color: var(--button-olumsuz-arkaplan-uzerinde);
+  background-color: #C0392B;
   color: white;
 }
 

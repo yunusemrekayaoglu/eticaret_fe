@@ -52,7 +52,7 @@ export const router = createRouter({
         },
 
         {
-            path: '/alis_hareketleri',
+            path: '/urun_alis',
             component: AlisHareketleriMenuComponent,
             children:
                 [
@@ -64,7 +64,7 @@ export const router = createRouter({
         },
 
         {
-            path: '/satis_modeli',
+            path: '/urun_satis',
             component: SatisModeliMenuComponent,
             children:
                 [

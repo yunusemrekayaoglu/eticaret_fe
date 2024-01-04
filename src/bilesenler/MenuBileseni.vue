@@ -7,10 +7,10 @@
   <a href="#">Anasayfa</a>
   <router-link to="/magaza">Mağaza Bilgileri</router-link>
   <router-link to="/urun">Ürün Bilgileri</router-link>
-  <router-link to="/musteri">Müşteriler</router-link>
   <router-link to="/siparis">Siparişler</router-link>
-  <router-link to="/alis_hareketleri">Alış İşlemleri</router-link>
-  <router-link to="satis_modeli">Satış İşlemleri</router-link>
+  <router-link to="/musteri">Müşteriler</router-link>
+  <router-link to="/urun_alis">Alış İşlemleri</router-link>
+  <router-link to="/urun_satis">Satış İşlemleri</router-link>
 </div>
 </template>
 

@@ -6,6 +6,8 @@ import AltBilgiBileseni from "@/bilesenler/AltBilgiBileseni.vue";
 import {temaDukkaniKullan} from "@/dukkanlar/temaDukkani";
 import {storeToRefs} from "pinia";
 import Tema_secici from "@/bilesenler/ortak/tema_secici.vue";
+import YukleniyorBileseni from "@/bilesenler/ortak/YukleniyorBileseni.vue";
+import UyariBileseni from "@/bilesenler/ortak/UyariBileseni.vue";
 
 
 
@@ -24,6 +26,8 @@ const {secili_tema} = storeToRefs(tema_dukkani);
     <IcerikBileseni />
     <AltBilgiBileseni />
     <Tema_secici />
+    <YukleniyorBileseni />
+    <UyariBileseni />
 
   </div>
 

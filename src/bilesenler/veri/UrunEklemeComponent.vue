@@ -3,16 +3,14 @@
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {ref} from "vue";
 import ModalComponent from "@/bilesenler/ortak/ModalComponent.vue";
+import {urunDukkaniKullan} from "@/dukkanlar/urunDukkani";
+import {storeToRefs} from "pinia";
 
-const urun = ref({
-  urun_id: -1,
-  urun_kodu:'',
-  adi: '',
-  fiyati: '',
-  aciklama: '',
- 
+const urunDukkan = urunDukkaniKullan();
 
-});
+const {yeniUrun} = storeToRefs(urunDukkan);
+
+const { ekle } = urunDukkan;
 
 const dialog_acik = ref(false)
 
@@ -31,7 +29,7 @@ function urun_bilgilerini_yazdir()
       <div class="etiket">Ürün Kodu</div>
       <div class="bilesen">
         <font-awesome-icon icon="tag" />
-        <input class="girdi" type="text" name="urun_kodu" v-model="urun.urun_kodu"/>
+        <input class="girdi" type="text" name="urun_kodu" v-model="yeniUrun.urun_kodu"/>
       </div>
     </div>
 
@@ -39,7 +37,7 @@ function urun_bilgilerini_yazdir()
       <div class="etiket">Ürün Adı</div>
       <div class="bilesen">
         <font-awesome-icon icon="heading" />
-        <input class="girdi" name="adi" v-model="urun.adi"/>
+        <input class="girdi" name="adi" v-model="yeniUrun.adi"/>
       </div>
     </div>
 
@@ -47,7 +45,7 @@ function urun_bilgilerini_yazdir()
       <div class="etiket">Ürün Fiyatı</div>
       <div class="bilesen">
         <font-awesome-icon icon="turkish-lira-sign" />
-        <input class="girdi" type="text" name="fiyati" v-model="urun.fiyati"/>
+        <input class="girdi" type="text" name="fiyati" v-model="yeniUrun.fiyati"/>
       </div>
     </div>
 
@@ -55,7 +53,7 @@ function urun_bilgilerini_yazdir()
       <div class="etiket">Ürün Açıklaması</div>
       <div class="bilesen">
         <font-awesome-icon icon="note-sticky" />
-        <textarea class="girdi" name="aciklama" v-model="urun.aciklama"></textarea>
+        <textarea class="girdi" name="aciklama" v-model="yeniUrun.aciklama"></textarea>
       </div>
     </div>
     <div class="satir">
@@ -77,6 +75,10 @@ function urun_bilgilerini_yazdir()
     <template #sorumetni>
       Değişiklikleri kaydetmek istediğinize emin misiniz? <br/>
       <span class="uyari"> işlem geri alınamaz.</span>
+    </template>
+    <template #butonlar>
+      <div class="soru button olumlu" @click="ekle( () => { dialog_acik=false; })">Evet</div>
+      <div class="soru button olumsuz">Hayır</div>
     </template>
   </ModalComponent>
 </template>
@@ -105,24 +107,24 @@ div.button {
   cursor: pointer;
 }
 div.button.olumlu {
-  background-color: var(--button-olumlu-arkaplan);
+  background-color: #52BE80;
   color: white;
 }
 
 div.button.olumlu:hover {
-  background-color: var(--button-olumlu-arkaplan-uzerinde);
+  background-color: #27AE60;
   color: white;
 }
 
 div.button.olumsuz {
-  background-color: var(--button-olumsuz-arkaplan);
-  color: white;
-}
-div.button.olumsuz:hover {
-  background-color: var(--button-olumsuz-arkaplan-uzerinde);
+  background-color: #D98880;
   color: white;
 }
 
+div.button.olumsuz:hover {
+  background-color: #C0392B;
+  color: white;
+}
 
 
 

@@ -3,7 +3,9 @@
 </script>
 
 <template>
-<router-view></router-view>
+  <div class="sag-icerik">
+    <router-view></router-view>
+  </div>
 </template>
 
 <style scoped>

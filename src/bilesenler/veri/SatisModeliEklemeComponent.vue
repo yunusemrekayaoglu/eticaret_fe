@@ -3,14 +3,15 @@
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {ref} from "vue";
 import ModalComponent from "@/bilesenler/ortak/ModalComponent.vue";
+import {satisModeliDukkaniKullan} from "@/dukkanlar/satisModeliDukkani";
+import {storeToRefs} from "pinia";
 
-const satis_modeli = ref({
-  satis_modeli_id: -1,
-  urun_id: '',
-  miktar:'',
-  birim_fiyat: '',
-  tarih: '',
-});
+const satisModeliDukkan = satisModeliDukkaniKullan();
+
+const {yeniSatisModeli} = storeToRefs(satisModeliDukkan);
+
+const {ekle} = satisModeliDukkan;
+
 
 const dialog_acik = ref(false)
 
@@ -18,7 +19,6 @@ const dialog_acik = ref(false)
 function satis_modeli_bilgilerini_yazdir()
 {
   dialog_acik.value = true;
-  console.log(satis_modeli.value)
 }
 
 </script>
@@ -29,7 +29,7 @@ function satis_modeli_bilgilerini_yazdir()
       <div class="etiket">Satış Miktarı</div>
       <div class="bilesen">
         <font-awesome-icon icon="circle-user" />
-        <input class="girdi" type="text" name="miktar" v-model="satis_modeli.miktar"/>
+        <input class="girdi" type="text" name="miktar" v-model="yeniSatisModeli.miktar"/>
       </div>
     </div>
 
@@ -37,7 +37,7 @@ function satis_modeli_bilgilerini_yazdir()
       <div class="etiket">Birim Fiyatı</div>
       <div class="bilesen">
         <font-awesome-icon icon="turkish-lira-sign" />
-        <input class="girdi" name="birim_fiyat" v-model="satis_modeli.birim_fiyat"/>
+        <input class="girdi" name="birim_fiyat" v-model="yeniSatisModeli.birim_fiyat"/>
       </div>
     </div>
 
@@ -45,7 +45,7 @@ function satis_modeli_bilgilerini_yazdir()
       <div class="etiket">Tarih</div>
       <div class="bilesen">
         <font-awesome-icon icon="calendar" />
-        <input type="date" id="tarih" name="tarih" v-model="satis_modeli.tarih">
+        <input type="date" id="tarih" name="tarih" v-model="yeniSatisModeli.tarih">
       </div>
     </div>
 
@@ -68,6 +68,10 @@ function satis_modeli_bilgilerini_yazdir()
     <template #sorumetni>
       Değişiklikleri kaydetmek istediğinize emin misiniz? <br/>
       <span class="uyari"> işlem geri alınamaz.</span>
+    </template>
+    <template #butonlar>
+      <div class="soru button olumlu" @click="ekle( () => { dialog_acik=false; })">Evet</div>
+      <div class="soru button olumsuz">Hayır</div>
     </template>
   </ModalComponent>
 </template>
@@ -100,21 +104,25 @@ div.button.olumlu {
   color: white;
 }
 
+div.button.olumlu {
+  background-color: #52BE80;
+  color: white;
+}
+
 div.button.olumlu:hover {
-  background-color: var(--button-olumlu-arkaplan-uzerinde);
+  background-color: #27AE60;
   color: white;
 }
 
 div.button.olumsuz {
-  background-color: var(--button-olumsuz-arkaplan);
+  background-color: #D98880;
   color: white;
 }
+
 div.button.olumsuz:hover {
-  background-color: var(--button-olumsuz-arkaplan-uzerinde);
+  background-color: #C0392B;
   color: white;
 }
-
-
 
 
 
