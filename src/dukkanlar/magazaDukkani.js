@@ -24,6 +24,12 @@ export const magazaDukkaniKullan = defineStore('magaza', () => {
 
     const magazalar = ref([]);
 
+    const sayfa_no = ref(0);
+
+    const toplam_sayfa = ref(0);
+
+    const sayfadaki_kayit_sayisi = ref(10);
+
     const api = axios.create({
         baseURL: 'http://127.0.0.1:5000/api/v1'
     });
@@ -39,8 +45,8 @@ export const magazaDukkaniKullan = defineStore('magaza', () => {
 
 
         function ekle(fonksiyon) {
-            console.log("Ekleniyor...");
             yukleniyor.value = true;
+
             api.post('/magaza', yeniMagaza.value)
                 .then(function (deger) {
                     if (fonksiyon !== undefined) {
@@ -68,7 +74,27 @@ export const magazaDukkaniKullan = defineStore('magaza', () => {
 
     };
 
-    function ara() {
+    function ara(sayfa=0) {
+        yukleniyor.value = true;
+        api.get(`/magaza/sayfa_sayisi/${sayfadaki_kayit_sayisi.value}`)
+            .then((veri) => {
+                toplam_sayfa.value = veri.data.sayfa_sayisi;
+                api.get(`/magaza/sayfa/${sayfa}/`)
+                    .then( (veri) => {
+                        yukleniyor.value = false;
+                        magazalar.value = veri.data;
+                        bilgi("Veri Yüklendi");
+                    })
+                    .catch( () => {
+                        yukleniyor.value = false;
+                        hata("Veri Yüklenemedi.");
+                    });
+
+            })
+            .catch(() => {
+                yukleniyor.value = false;
+                hata('Sayfa Sayısı Öğrenilemedi.')
+            });
 
     };
 

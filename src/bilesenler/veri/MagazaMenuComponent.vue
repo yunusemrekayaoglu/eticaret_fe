@@ -6,7 +6,7 @@
   <div class="magaza_menu">
     <div class="alt_menu">
       <router-link to="magaza/ekle">Mağaza Ekle</router-link>
-      <a href="#">Mağaza Liste</a>
+      <router-link to="magaza/liste">Mağaza Liste</router-link>
     </div>
     <div class="icerik">
       <router-view> </router-view>

@@ -10,6 +10,7 @@ import AlisHareketleriMenuComponent from "@/bilesenler/veri/AlisHareketleriMenuC
 import AlisHareketleriEklemeComponent from "@/bilesenler/veri/AlisHareketleriEklemeComponent.vue";
 import SatisModeliEklemeComponent from "@/bilesenler/veri/SatisModeliEklemeComponent.vue";
 import SatisModeliMenuComponent from "@/bilesenler/veri/SatisModeliMenuComponent.vue";
+import MagazaListeComponent from "@/bilesenler/veri/MagazaListeComponent.vue";
 
 
 export const router = createRouter({
@@ -24,6 +25,10 @@ export const router = createRouter({
                 {
                     path: 'ekle',
                     component: MagazaEklemeComponent
+                },
+                {
+                    path: 'liste',
+                    component: MagazaListeComponent
                 }
             ]
         },
