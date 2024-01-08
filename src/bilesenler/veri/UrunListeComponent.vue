@@ -299,7 +299,7 @@ div.button.olumlu {
 }
 
 div.button.olumlu:hover {
-  background-color: #27AE60;
+  background-color: #27AE61;
   color: white;
 }
 
