@@ -111,7 +111,7 @@ export const musteriDukkaniKullan = defineStore('musteri', () => {
             });
     };
 
-    function sil(fonksiyon) {
+    function sil(fonksiyon)  {
         yukleniyor.value=true;
         api.delete(`/musteri/${seciliMusteri.value.id}`)
             .then((result) => {
