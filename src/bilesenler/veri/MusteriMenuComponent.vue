@@ -6,7 +6,7 @@
   <div class="musteri_menu">
     <div class="alt_menu">
       <router-link to="musteri/ekle">Müşteri Ekle</router-link>
-      <a href="#">Müşterileri Listele</a>
+      <router-link to="musteri/liste">Müşteri Listele</router-link>
     </div>
     <div class="icerik">
       <router-view> </router-view>

@@ -24,11 +24,10 @@ export const magazaDukkaniKullan = defineStore('magaza', () => {
 
     const magazalar = ref([]);
 
-    const sayfa_no = ref(0);
-
     const toplam_sayfa = ref(0);
 
     const sayfadaki_kayit_sayisi = ref(10);
+
 
     const api = axios.create({
         baseURL: 'http://127.0.0.1:5000/api/v1'
@@ -38,15 +37,43 @@ export const magazaDukkaniKullan = defineStore('magaza', () => {
 
     const {yukleniyor} = storeToRefs(yukleniyorDukkan);
 
+    function guncelle(fonksiyon) {
+        yukleniyor.value=true;
+        api.put(`/magaza/${seciliMagaza.value.id}`,{
+            adi: seciliMagaza.value.adi,
+            adres: seciliMagaza.value.adres,
+            telefon: seciliMagaza.value.telefon,
+            yetkili: seciliMagaza.value.yetkili
+        })
+            .then((result) => {
+                yukleniyor.value=false;
+                bilgi(seciliMagaza.value.adi + " İsimli Mağaza güncellendi.");
+            })
+            .catch(() => {
+                yukleniyor.value=false;
+                hata("Kayıt silinemedi.");
+                fonksiyon();
+            }
+    );
+    };
+
     const uyariDukkani = uyariDukkaniKullan();
+
+
 
     const {bilgi, hata} = uyariDukkani;
 
 
+    function magazaSec(magaza) {
+        seciliMagaza.value.id = magaza.id;
+        seciliMagaza.value.adi = magaza.adi;
+        seciliMagaza.value.adres = magaza.adres;
+        seciliMagaza.value.telefon = magaza.telefon;
+        seciliMagaza.value.yetkili = magaza.yetkili;
+    }
 
-        function ekle(fonksiyon) {
+    function ekle(fonksiyon) {
             yukleniyor.value = true;
-
             api.post('/magaza', yeniMagaza.value)
                 .then(function (deger) {
                     if (fonksiyon !== undefined) {
@@ -54,7 +81,6 @@ export const magazaDukkaniKullan = defineStore('magaza', () => {
                     } else {
                         console.log(deger.data);
                     }
-                    console.log(deger.data);
                     yeniMagaza.value.adi = '';
                     yeniMagaza.value.adres = '';
                     yeniMagaza.value.telefon = '';
@@ -64,22 +90,31 @@ export const magazaDukkaniKullan = defineStore('magaza', () => {
                 }).catch(function () {
                     hata('Mağaza Eklenemedi.');
             });
+
         };
 
-    function guncelle() {
-
+    function sil(fonksiyon) {
+        yukleniyor.value=true;
+        api.delete(`/magaza/${seciliMagaza.value.id}`)
+            .then((result) => {
+               yukleniyor.value=false
+                bilgi(seciliMagaza.value.adi + " İsimli Mağaza Silindi.");
+               fonksiyon();
+            })
+            .catch(() => {
+                yukleniyor.value=false;
+                hata("Kayıt Silinemedi.");
+                fonksiyon();
+            });
     };
 
-    function sil() {
-
-    };
-
-    function ara(sayfa=0) {
+    function ara(sayfa=1) {
         yukleniyor.value = true;
         api.get(`/magaza/sayfa_sayisi/${sayfadaki_kayit_sayisi.value}`)
             .then((veri) => {
                 toplam_sayfa.value = veri.data.sayfa_sayisi;
-                api.get(`/magaza/sayfa/${sayfa}/`)
+                sayfa = Math.min(sayfa, toplam_sayfa.value);
+                api.get(`/magaza/sayfa/${sayfa}/${sayfadaki_kayit_sayisi.value}`)
                     .then( (veri) => {
                         yukleniyor.value = false;
                         magazalar.value = veri.data;
@@ -98,5 +133,5 @@ export const magazaDukkaniKullan = defineStore('magaza', () => {
 
     };
 
-    return {seciliMagaza, yeniMagaza, magazalar, ekle, sil, guncelle, ara};
+    return {seciliMagaza, yeniMagaza, magazalar, toplam_sayfa, ekle, sil, guncelle, ara, magazaSec};
 })

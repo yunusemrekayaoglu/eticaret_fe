@@ -1,15 +1,15 @@
 <script setup>
 import {onMounted, ref} from "vue";
-import {magazaDukkaniKullan} from "@/dukkanlar/magazaDukkani";
 import {storeToRefs} from "pinia";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import {urunDukkaniKullan} from "@/dukkanlar/urunDukkani";
 import ModalComponent from "@/bilesenler/ortak/ModalComponent.vue";
 
-const magazaDukkani = magazaDukkaniKullan();
+const urunDukkani = urunDukkaniKullan();
 
-const {ara, sil, guncelle, magazaSec} = magazaDukkani;
+const {ara, sil, guncelle, urunSec} = urunDukkaniKullan();
 
-const {magazalar, toplam_sayfa, seciliMagaza} = storeToRefs(magazaDukkani);
+const {urunler, toplam_sayfa, seciliUrun} = storeToRefs(urunDukkani);
 
 
 const sayfa_no = ref(1);
@@ -48,53 +48,52 @@ function sonSayfa() {
   if(sayfa_no.value < toplam_sayfa.value) {
     sayfayaGit(toplam_sayfa.value);
   }
-  
+
 }
 
 const gorunum = ref('liste');
 
+
 const silme_dialog_acik = ref(false);
 const duzenle_dialog_acik = ref(false);
-
-
 
 </script>
 
 <template>
-<div class="magazalar" v-if="gorunum==='liste'">
-  <div class="magazalar baslik">
-    <span>Tanımlı Mağazalar</span>
-  </div>
-  <div class="satir baslik">
-    <div class="hucre sutun-0">Mağaza Adı</div>
-    <div class="hucre sutun-1">Mağaza Adresi</div>
-    <div class="hucre sutun-2">Mağaza Telefonu</div>
-    <div class="hucre sutun-3">Mağaza Yetkili Kişi</div>
-  </div>
-  <div class="veriler">
-    <div class="satir" v-for="magaza in magazalar">
-      <div class="hucre sutun-0">{{ magaza.adi }}</div>
-      <div class="hucre sutun-1">{{ magaza.adres }}</div>
-      <div class="hucre sutun-2">{{ magaza.telefon }}</div>
-      <div class="hucre sutun-3">{{ magaza.yetkili }}</div>
-      <div class="hucre sutun-4">
-        <a class="guncelle-btn btn" @click="magazaSec(magaza);duzenle_dialog_acik=true;">
-          <font-awesome-icon :icon="['fas', 'pen-to-square']" />
-        </a>
-        <a class="sil-btn btn" @click="seciliMagaza=magaza; silme_dialog_acik=true;">
-          <font-awesome-icon :icon="['fas', 'trash-can']" />
-        </a>
+  <div class="urunler" v-if="gorunum==='liste'">
+    <div class="urunler baslik">
+      <span>Tanımlı Ürünler</span>
+    </div>
+    <div class="satir baslik">
+      <div class="hucre sutun-0">Ürün Kodu</div>
+      <div class="hucre sutun-1">Ürün Adı</div>
+      <div class="hucre sutun-2">Fiyatı</div>
+      <div class="hucre sutun-3">Açıklama</div>
+    </div>
+    <div class="veriler">
+      <div class="satir" v-for="urun in urunler">
+        <div class="hucre sutun-0">{{ urun.urun_kodu }}</div>
+        <div class="hucre sutun-1">{{ urun.adi }}</div>
+        <div class="hucre sutun-2">{{ urun.fiyati }}</div>
+        <div class="hucre sutun-3">{{ urun.aciklama }}</div>
+        <div class="hucre sutun-4">
+          <a class="guncelle-btn btn" @click="urunSec(urun);duzenle_dialog_acik=true;">
+            <font-awesome-icon :icon="['fas', 'pen-to-square']" />
+          </a>
+          <a class="sil-btn btn">
+            <font-awesome-icon :icon="['fas', 'trash-can']" @click="seciliUrun=urun; silme_dialog_acik=true;"/>
+          </a>
+        </div>
+      </div>
+      <div class="sayfalar">
+        <a class="sayfa" :class="sayfa_no===1? 'pasif':''" @click="ilkSayfa">|&lt </a>
+        <a class="sayfa" :class="sayfa_no===1? 'pasif':''" @click="oncekiSayfa">&lt </a>
+        <a class="sayfa" :class="syf==sayfa_no?'aktif':''" @click="sayfayaGit(syf)" v-for="syf in toplam_sayfa">{{ syf }}</a>
+        <a class="sayfa" :class="sayfa_no===toplam_sayfa?'pasif':''" @click="sonrakiSayfa">&gt </a>
+        <a class="sayfa" :class="sayfa_no===toplam_sayfa?'pasif':''" @click="sonSayfa">&gt| </a>
       </div>
     </div>
-    <div class="sayfalar">
-      <a class="sayfa" :class="sayfa_no===1? 'pasif':''" @click="ilkSayfa">|&lt </a>
-      <a class="sayfa" :class="sayfa_no===1? 'pasif':''" @click="oncekiSayfa">&lt </a>
-      <a class="sayfa" :class="syf==sayfa_no?'aktif':''" @click="sayfayaGit(syf)" v-for="syf in toplam_sayfa">{{ syf }}</a>
-      <a class="sayfa" :class="sayfa_no===toplam_sayfa?'pasif':''" @click="sonrakiSayfa">&gt </a>
-      <a class="sayfa" :class="sayfa_no===toplam_sayfa?'pasif':''" @click="sonSayfa">&gt| </a>
-    </div>
   </div>
-</div>
 
   <ModalComponent v-model:acik="silme_dialog_acik" @update:kapanma-sebebi="sebep => {
     if(sebep==='buton')
@@ -106,7 +105,7 @@ const duzenle_dialog_acik = ref(false);
       Silme Onayı
     </template>
     <template #sorumetni>
-       {{ seciliMagaza.adi }} İsimli Mağazayı  Silmek istediğinize Emin misiniz? <br/>
+      {{ seciliUrun.adi }} İsimli Ürünü  Silmek istediğinize Emin misiniz? <br/>
       <span class="uyari"> işlem geri alınamaz.</span>
     </template>
     <template #butonlar>
@@ -115,7 +114,6 @@ const duzenle_dialog_acik = ref(false);
     </template>
   </ModalComponent>
 
-
   <ModalComponent v-model:acik="duzenle_dialog_acik" @update:kapanma-sebebi="sebep => {
     if(sebep==='buton')
       {
@@ -123,45 +121,42 @@ const duzenle_dialog_acik = ref(false);
       }
   }">
     <template #baslik>
-      Mağaza Düzenleme
+      Ürün Düzenleme
     </template>
     <template #sorumetni>
       <div class="data_form">
         <div class="satir">
-          <div class="etiket">Mağaza Adı</div>
+          <div class="etiket">Ürün Kodu</div>
           <div class="bilesen">
-            <font-awesome-icon icon="basket-shopping"></font-awesome-icon>
-            <input class="girdi" type="text" name="adi" v-model="seciliMagaza.adi"/>
+            <font-awesome-icon icon="tag" />
+            <input class="girdi" type="text" name="urun_kodu" v-model="seciliUrun.urun_kodu"/>
           </div>
         </div>
 
         <div class="satir">
-          <div class="etiket">Mağaza Adresi</div>
+          <div class="etiket">Ürün Adı</div>
           <div class="bilesen">
-            <font-awesome-icon icon="fa-solid fa-location-pin"></font-awesome-icon>
-            <textarea class="girdi" name="adres" v-model="seciliMagaza.adres">
-      </textarea>
+            <font-awesome-icon icon="heading" />
+            <input class="girdi" name="adi" v-model="seciliUrun.adi"/>
           </div>
         </div>
 
         <div class="satir">
-          <div class="etiket">Mağaza Telefonu</div>
+          <div class="etiket">Ürün Fiyatı</div>
           <div class="bilesen">
-            <font-awesome-icon icon="fa-solid fa-phone"></font-awesome-icon>
-            <input class="girdi" type="text" name="telefon" placeholder="0 (5XX) XXX XX XX" v-model="seciliMagaza.telefon"/>
+            <font-awesome-icon icon="turkish-lira-sign" />
+            <input class="girdi" type="text" name="fiyati" v-model="seciliUrun.fiyati"/>
           </div>
         </div>
 
         <div class="satir">
-          <div class="etiket">Mağaza Yetkili Kişi Adı</div>
+          <div class="etiket">Ürün Açıklaması</div>
           <div class="bilesen">
-            <font-awesome-icon icon="fa-solid fa-person"></font-awesome-icon>
-            <input class="girdi" type="text" name="yetkili" v-model="seciliMagaza.yetkili"/>
+            <font-awesome-icon icon="note-sticky" />
+            <textarea class="girdi" name="aciklama" v-model="seciliUrun.aciklama"></textarea>
           </div>
         </div>
         </div>
-
-
     </template>
     <template #butonlar>
       <div class="soru button olumsuz" @click="guncelle( () => { duzenle_dialog_acik=false; sayfayaGit(sayfa_no); })">Evet</div>
@@ -170,36 +165,11 @@ const duzenle_dialog_acik = ref(false);
   </ModalComponent>
 
 
+
+
 </template>
 
 <style scoped>
-div.button {
-  display: block;
-  padding: 10px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-div.button.olumlu {
-  background-color: #52BE80;
-  color: white;
-}
-
-div.button.olumlu:hover {
-  background-color: #27AE60;
-  color: white;
-}
-
-div.button.olumsuz {
-  background-color: #D98880;
-  color: white;
-}
-
-div.button.olumsuz:hover {
-  background-color: #C0392B;
-  color: white;
-}
-
 
 a.btn {
   margin: 10px 10px;
@@ -248,11 +218,11 @@ a.sayfa.aktif {
 
 
 
-div.magazalar {
+div.urunler {
   width: 100%;
   padding: 20px 10px;
 }
-div.magazalar.baslik{
+div.urunler.baslik{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -266,7 +236,7 @@ div.satir.baslik {
   font-size: 15pt;
 }
 
-div.magazalar.baslik span {
+div.urunler.baslik span {
   font-weight: bold;
   font-size: 20pt;
 }
@@ -311,5 +281,35 @@ div.hucre.sutun-4 {
   flex: 0 0 10%;
   border: none;
 }
+div.buttoncubugu {
+  display: flex;
+  gap: 5px;
+}
 
+div.button {
+  display: block;
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+div.button.olumlu {
+  background-color: #52BE80;
+  color: white;
+}
+
+div.button.olumlu:hover {
+  background-color: #27AE60;
+  color: white;
+}
+
+div.button.olumsuz {
+  background-color: #D98880;
+  color: white;
+}
+
+div.button.olumsuz:hover {
+  background-color: #C0392B;
+  color: white;
+}
 </style>

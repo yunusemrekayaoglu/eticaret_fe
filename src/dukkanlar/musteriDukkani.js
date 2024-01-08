@@ -16,6 +16,12 @@ export const musteriDukkaniKullan = defineStore('musteri', () => {
 
     const musteriler = ref([]);
 
+    const toplam_sayfa = ref(0);
+
+    const sayfadaki_kayit_sayisi = ref(10);
+
+
+
     const api = axios.create({
         baseURL: 'http://127.0.0.1:5000/api/v1'
     });
@@ -55,13 +61,74 @@ export const musteriDukkaniKullan = defineStore('musteri', () => {
 
     };
 
-    function sil() {
-
+    function guncelle(fonksiyon) {
+        yukleniyor.value=true;
+        api.put(`/musteri/${seciliMusteri.value.id}`,{
+            ad: seciliMusteri.value.ad,
+            soyad: seciliMusteri.value.soyad,
+            telefon: seciliMusteri.value.telefon,
+            adres: seciliMusteri.value.adres
+        })
+            .then((result) => {
+                yukleniyor.value=false;
+                bilgi(seciliMusteri.value.adi + " İsimli Müşteri güncellendi.");
+            })
+            .catch(() => {
+                    yukleniyor.value=false;
+                    hata("Kayıt silinemedi.");
+                    fonksiyon();
+                }
+            );
     };
 
-    function ara() {
 
+    function musteriSec(musteri) {
+        seciliMusteri.value.id = musteri.id;
+        seciliMusteri.value.ad = musteri.ad;
+        seciliMusteri.value.soyad = musteri.soyad;
+        seciliMusteri.value.telefon = musteri.telefon;
+        seciliMusteri.value.adres = musteri.adres;
+    }
+
+    function ara(sayfa) {
+        yukleniyor.value = true;
+        api.get(`/musteri/sayfa_sayisi/${sayfadaki_kayit_sayisi.value}`)
+            .then((veri) => {
+                toplam_sayfa.value = veri.data.sayfa_sayisi;
+                api.get(`/musteri/sayfa/${sayfa}/${sayfadaki_kayit_sayisi.value}`)
+                    .then( (veri) => {
+                        yukleniyor.value = false;
+                        musteriler.value = veri.data;
+                        bilgi("Veri Yüklendi");
+                    })
+                    .catch( () => {
+                        yukleniyor.value = false;
+                        hata("Veri Yüklenemedi.");
+                    });
+
+            })
+            .catch(() => {
+                yukleniyor.value = false;
+                hata('Sayfa Sayısı Öğrenilemedi.')
+            });
     };
 
-    return {seciliMusteri, yeniMusteri, musteriler, ekle, sil, guncelle, ara};
+    function sil(fonksiyon) {
+        yukleniyor.value=true;
+        api.delete(`/musteri/${seciliMusteri.value.id}`)
+            .then((result) => {
+                yukleniyor.value=false
+                bilgi(seciliMusteri.value.adi + " İsimli Müşteri Silindi.");
+                fonksiyon();
+            })
+            .catch(() => {
+                yukleniyor.value=false;
+                hata("Kayıt Silinemedi.");
+                fonksiyon();
+            });
+    };
+
+
+
+    return {seciliMusteri, yeniMusteri, musteriler, ekle, sil, guncelle, ara, musteriSec};
 })

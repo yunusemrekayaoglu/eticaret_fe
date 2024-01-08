@@ -6,7 +6,7 @@
   <div class="satis_modeli_menu">
     <div class="alt_menu">
       <router-link to="urun_satis/ekle">Satış  Modeli Ekle</router-link>
-      <a href="#">Satış Modellerini Liste</a>
+      <router-link to="urun_satis/liste">Satış  Modeli Listele</router-link>
     </div>
     <div class="icerik">
       <router-view> </router-view>

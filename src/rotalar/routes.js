@@ -1,5 +1,5 @@
 import MagazaMenuComponent from "@/bilesenler/veri/MagazaMenuComponent.vue";
-import {createRouter, createWebHashHistory} from "vue-router";
+import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 import BosMenu from "@/bilesenler/ortak/BosMenu.vue";
 import MagazaEklemeComponent from "@/bilesenler/veri/MagazaEklemeComponent.vue";
 import UrunMenuComponent from "@/bilesenler/veri/UrunMenuComponent.vue";
@@ -11,10 +11,14 @@ import AlisHareketleriEklemeComponent from "@/bilesenler/veri/AlisHareketleriEkl
 import SatisModeliEklemeComponent from "@/bilesenler/veri/SatisModeliEklemeComponent.vue";
 import SatisModeliMenuComponent from "@/bilesenler/veri/SatisModeliMenuComponent.vue";
 import MagazaListeComponent from "@/bilesenler/veri/MagazaListeComponent.vue";
+import UrunListeComponent from "@/bilesenler/veri/UrunListeComponent.vue";
+import MusteriListeComponent from "@/bilesenler/veri/MusteriListeComponent.vue";
+import AlisHareketleriListeComponent from "@/bilesenler/veri/AlisHareketleriListeComponent.vue";
+import SatisModeliListeComponent from "@/bilesenler/veri/SatisModeliListeComponent.vue";
 
 
 export const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes: [
         {path: '/', component: BosMenu},
         {
@@ -40,6 +44,10 @@ export const router = createRouter({
                     {
                         path: 'ekle',
                         component: UrunEklemeComponent
+                    },
+                    {
+                        path: 'liste',
+                        component: UrunListeComponent
                     }
                 ]
         },
@@ -52,6 +60,10 @@ export const router = createRouter({
                     {
                         path: 'ekle',
                         component: MusteriEklemeComponent
+                    },
+                    {
+                        path: 'liste',
+                        component: MusteriListeComponent
                     }
                 ]
         },
@@ -64,6 +76,10 @@ export const router = createRouter({
                     {
                         path: 'ekle',
                         component: AlisHareketleriEklemeComponent
+                    },
+                    {
+                        path: 'liste',
+                        component: AlisHareketleriListeComponent
                     }
                 ]
         },
@@ -76,7 +92,11 @@ export const router = createRouter({
                     {
                         path: 'ekle',
                         component: SatisModeliEklemeComponent
-                    }
+                    },
+                    {
+                        path: 'liste',
+                        component: SatisModeliListeComponent
+                    },
                 ]
         },
 

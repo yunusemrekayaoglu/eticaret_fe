@@ -6,7 +6,7 @@
   <div class="alis_hareketleri_menu">
     <div class="alt_menu">
       <router-link to="urun_alis/ekle">Alış Hareketi Ekle</router-link>
-      <a href="#">Alış Hareketlerini Listele</a>
+      <router-link to="urun_alis/liste">Alış Hareketi Listele</router-link>
     </div>
     <div class="icerik">
       <router-view> </router-view>

@@ -16,11 +16,11 @@ import {
     faBasketShopping, faCalendar, faCircleUser,
     faHeading,
     faLocationPin,
-    faNoteSticky,
+    faNoteSticky, faPenToSquare,
     faPerson,
     faPhone,
     faQuestion,
-    faTag,
+    faTag, faTrashCan,
     faTurkishLiraSign
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -35,7 +35,9 @@ library.add([faBasketShopping,
              faHeading,
              faTag,
              faCircleUser,
-             faCalendar])
+             faCalendar,
+             faPenToSquare,
+             faTrashCan])
 
 
 const pinia = createPinia();

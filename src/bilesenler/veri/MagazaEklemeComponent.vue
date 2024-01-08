@@ -37,7 +37,6 @@ function magaza_bilgilerini_yazdir() {
       <div class="bilesen">
         <font-awesome-icon icon="fa-solid fa-location-pin"></font-awesome-icon>
         <textarea class="girdi" name="adres" v-model="yeniMagaza.adres">
-
       </textarea>
       </div>
     </div>

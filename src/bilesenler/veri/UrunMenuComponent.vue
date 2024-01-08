@@ -6,7 +6,7 @@
   <div class="urun_menu">
     <div class="alt_menu">
       <router-link to="urun/ekle">Ürün Ekle</router-link>
-      <a href="#">Ürün Liste</a>
+      <router-link to="urun/liste">Ürün Liste</router-link>
     </div>
     <div class="icerik">
       <router-view> </router-view>
