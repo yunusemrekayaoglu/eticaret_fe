@@ -57,9 +57,7 @@ export const musteriDukkaniKullan = defineStore('musteri', () => {
         });
     };
 
-    function guncelle() {
 
-    };
 
     function guncelle(fonksiyon) {
         yukleniyor.value=true;
